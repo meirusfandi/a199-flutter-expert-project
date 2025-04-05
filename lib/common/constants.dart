@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const String BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
+const String BASE_IMAGES_TV = "https://api.themoviedb.org/3/tv/{series_id}/images";
 
 // colors
 const Color kRichBlack = Color(0xFF000814);
