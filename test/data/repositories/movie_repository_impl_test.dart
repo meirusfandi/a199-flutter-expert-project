@@ -18,17 +18,14 @@ void main() {
   late MovieRepositoryImpl repository;
   late MockMovieRemoteDataSource mockRemoteDataSource;
   late MockMovieLocalDataSource mockLocalDataSource;
-  late MockTvRemoteDataSource mockTvRemoteDataSource;
 
   setUp(() {
     mockRemoteDataSource = MockMovieRemoteDataSource();
     mockLocalDataSource = MockMovieLocalDataSource();
-    mockTvRemoteDataSource = MockTvRemoteDataSource();
 
     repository = MovieRepositoryImpl(
       remoteDataSource: mockRemoteDataSource,
       localDataSource: mockLocalDataSource,
-      tvRemoteDataSource: mockTvRemoteDataSource,
     );
   });
 

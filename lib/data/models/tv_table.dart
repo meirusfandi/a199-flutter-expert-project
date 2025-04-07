@@ -1,3 +1,4 @@
+import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/domain/entities/tv_entity.dart';
 import 'package:equatable/equatable.dart';
 
@@ -14,12 +15,12 @@ class TvTable extends Equatable {
     required this.overview,
   });
 
-  // factory TvTable.fromEntity(MovieDetail movie) => MovieTable(
-  //   id: movie.id,
-  //   title: movie.title,
-  //   posterPath: movie.posterPath,
-  //   overview: movie.overview,
-  // );
+  factory TvTable.fromEntity(TvDetail movie) => TvTable(
+    id: movie.id,
+    name: movie.name,
+    posterPath: movie.posterPath,
+    overview: movie.overview,
+  );
 
   factory TvTable.fromMap(Map<String, dynamic> map) => TvTable(
     id: map['id'],

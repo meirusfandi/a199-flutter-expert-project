@@ -3,7 +3,9 @@ import 'package:ditonton/common/constants.dart';
 import 'package:ditonton/common/state_enum.dart';
 import 'package:ditonton/domain/entities/tv_entity.dart';
 import 'package:ditonton/presentation/pages/popular_tv_page.dart';
+import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_tv_page.dart';
+import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +35,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
         actions: [
           IconButton(
             onPressed: () {
-              // Navigator.pushNamed(context, SearchPage.ROUTE_NAME);
+              Navigator.pushNamed(context, SearchPage.ROUTE_NAME, arguments: false);
             },
             icon: Icon(Icons.search),
           )
@@ -141,11 +143,11 @@ class TvDataList extends StatelessWidget {
             padding: const EdgeInsets.all(8),
             child: InkWell(
               onTap: () {
-                // Navigator.pushNamed(
-                //   context,
-                //   MovieDetailPage.ROUTE_NAME,
-                //   arguments: movie.id,
-                // );
+                Navigator.pushNamed(
+                  context,
+                  TvDetailPage.ROUTE_NAME,
+                  arguments: tvs.id,
+                );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
