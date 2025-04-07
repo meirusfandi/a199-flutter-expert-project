@@ -93,7 +93,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
             itemCount: data.watchlistMovies.length,
           ) : Center(
         key: Key('error_message'),
-        child: Text(data.message),
+        child: Text("No Movies in Watchlist"),
         );
         } else {
           return Center(
@@ -121,7 +121,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
             itemCount: dataTv.watchlistTvs.length,
           ) : Center(
             key: Key('error_message'),
-            child: Text(dataTv.message),
+            child: Text("No Tv Series in Watchlist"),
           );
         } else {
           return Center(

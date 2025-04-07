@@ -27,7 +27,7 @@ class TvDetailResponse extends Equatable {
   final double voteAverage;
   final int voteCount;
   final List<int> episodeRunTime;
-  final List<SeasonModel> seasons;
+  final List<SeasonModel>? seasons;
 
   TvDetailResponse({
     required this.adult,
@@ -53,7 +53,7 @@ class TvDetailResponse extends Equatable {
     required this.voteAverage,
     required this.voteCount,
     required this.episodeRunTime,
-    required this.seasons,
+    this.seasons,
   });
 
   factory TvDetailResponse.fromJson(Map<String, dynamic> json) =>
@@ -110,7 +110,7 @@ class TvDetailResponse extends Equatable {
     "vote_average": voteAverage,
     "vote_count": voteCount,
     "episode_run_time": List<dynamic>.from((episodeRunTime).map((x) => x)),
-    "seasons": List<dynamic>.from(seasons.map((x) => x.toJson())),
+    "seasons": List<dynamic>.from(seasons?.map((x) => x.toJson()).toList() ?? []),
   };
 
   TvDetail toEntity() {

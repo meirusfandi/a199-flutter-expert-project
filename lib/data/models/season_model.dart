@@ -14,14 +14,14 @@ class SeasonModel extends Equatable {
 
   factory SeasonModel.fromJson(Map<String, dynamic> json) {
     return SeasonModel(
-      airDate: json['air_date'] as String,
-      episodeCount: json['episode_count'] as int,
-      id: json['id'] as int,
-      name: json['name'] as String,
-      overview: json['overview'] as String,
-      posterPath: json['poster_path'] as String,
-      seasonNumber: json['season_number'] as int,
-      voteAverage: (json['vote_average'] as num).toDouble(),
+      airDate: json['air_date'] ?? '',
+      episodeCount: json['episode_count'] ?? 0,
+      id: json['id'] ?? 0,
+      name: json['name'] ?? '',
+      overview: json['overview'] ?? "",
+      posterPath: json['poster_path'] ?? "",
+      seasonNumber: json['season_number'] ?? 0,
+      voteAverage: json['vote_average'] ?? 0.0,
     );
   }
   Map<String, dynamic> toJson() {
