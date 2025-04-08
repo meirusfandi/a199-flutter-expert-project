@@ -21,7 +21,7 @@ class SeasonModel extends Equatable {
       overview: json['overview'] ?? "",
       posterPath: json['poster_path'] ?? "",
       seasonNumber: json['season_number'] ?? 0,
-      voteAverage: json['vote_average'] ?? 0.0,
+      voteAverage: json['vote_average'] ?? 0,
     );
   }
   Map<String, dynamic> toJson() {
