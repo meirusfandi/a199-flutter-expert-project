@@ -10,14 +10,12 @@ import 'package:ditonton/domain/usecases/remove_tv_watchlist.dart';
 import 'package:ditonton/domain/usecases/save_tv_watchlist.dart';
 import 'package:mockito/annotations.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 
 import '../../dummy_data/tv/dummy_objects.dart';
 import 'Tv_detail_notifier_test.mocks.dart';
 
-import 'movie_detail_notifier_test.mocks.dart';
 
 @GenerateMocks([
   GetTvDetail,
