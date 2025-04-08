@@ -185,6 +185,26 @@ class DetailContent extends StatelessWidget {
                             ),
                             SizedBox(height: 16),
                             Text(
+                              'Seasons',
+                              style: kHeading6,
+                            ),
+                            Container(
+                              height: 32,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: Tv.seasons.length,
+                                itemBuilder: (context, index) {
+                                  final season = Tv.seasons;
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      season[index].name
+                                    ),
+                                  );
+                                }
+                              ),
+                            ),
+                            Text(
                               'Recommendations',
                               style: kHeading6,
                             ),

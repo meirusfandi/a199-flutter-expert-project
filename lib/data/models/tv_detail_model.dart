@@ -127,6 +127,7 @@ class TvDetailResponse extends Equatable {
       name: this.name,
       voteAverage: this.voteAverage,
       voteCount: this.voteCount,
+      seasons: this.seasons?.map((season) => season.toEntity()).toList() ?? [],
     );
   }
 

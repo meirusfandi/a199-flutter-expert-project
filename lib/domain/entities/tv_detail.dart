@@ -1,4 +1,5 @@
 import 'package:ditonton/domain/entities/genre.dart';
+import 'package:ditonton/domain/entities/season.dart';
 import 'package:equatable/equatable.dart';
 
 class TvDetail extends Equatable {
@@ -14,6 +15,7 @@ class TvDetail extends Equatable {
   final String name;
   final double voteAverage;
   final int voteCount;
+  final List<Season> seasons;
 
   TvDetail({
     required this.adult,
@@ -28,6 +30,7 @@ class TvDetail extends Equatable {
     required this.name,
     required this.voteAverage,
     required this.voteCount,
+    required this.seasons,
   });
 
   @override
@@ -43,5 +46,6 @@ class TvDetail extends Equatable {
     name,
     voteAverage,
     voteCount,
+    seasons
   ];
 }

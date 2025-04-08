@@ -1,5 +1,6 @@
 import 'package:ditonton/data/models/tv_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
+import 'package:ditonton/domain/entities/season.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/domain/entities/tv_entity.dart';
 
@@ -34,6 +35,18 @@ final testTvDetail = TvDetail(
   name: 'name',
   voteAverage: 1,
   voteCount: 1,
+  seasons: [
+    Season(
+        airDate: "2014-02-17",
+        episodeCount: 191,
+        id: 1,
+        name: "Season 1",
+        overview: "overview",
+        posterPath: "/jZ4lEt1vT260afMQIwVQcVFsAys.jpg",
+        seasonNumber: 1,
+        voteAverage: 6.4
+    )
+  ],
 );
 
 final testWatchlistTv = TvEntity.watchlist(
