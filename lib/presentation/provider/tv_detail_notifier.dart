@@ -51,22 +51,21 @@ class TvDetailNotifier extends ChangeNotifier {
     final detailResult = await getTvDetail.execute(id);
     final recommendationResult = await getTvRecommendations.execute(id);
     detailResult.fold(
-          (failure) {
+      (failure) {
         _TvState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
-          (Tv) {
-
+      (Tv) {
         _recommendationState = RequestState.Loading;
         _Tv = Tv;
         notifyListeners();
         recommendationResult.fold(
-              (failure) {
+          (failure) {
             _recommendationState = RequestState.Error;
             _message = failure.message;
           },
-              (Tvs) {
+          (Tvs) {
             _recommendationState = RequestState.Loaded;
             _TvRecommendations = Tvs;
           },
@@ -84,10 +83,10 @@ class TvDetailNotifier extends ChangeNotifier {
     final result = await saveWatchlist.execute(Tv);
 
     await result.fold(
-          (failure) async {
+      (failure) async {
         _watchlistMessage = failure.message;
       },
-          (successMessage) async {
+      (successMessage) async {
         _watchlistMessage = successMessage;
       },
     );
@@ -99,10 +98,10 @@ class TvDetailNotifier extends ChangeNotifier {
     final result = await removeWatchlist.execute(Tv);
 
     await result.fold(
-          (failure) async {
+      (failure) async {
         _watchlistMessage = failure.message;
       },
-          (successMessage) async {
+      (successMessage) async {
         _watchlistMessage = successMessage;
       },
     );

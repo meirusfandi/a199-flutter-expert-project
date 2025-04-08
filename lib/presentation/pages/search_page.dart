@@ -26,10 +26,11 @@ class SearchPage extends StatelessWidget {
           children: [
             TextField(
               onSubmitted: (query) {
-                (isMovie) ? Provider.of<MovieSearchNotifier>(context, listen: false)
-                    .fetchMovieSearch(query)
+                (isMovie)
+                    ? Provider.of<MovieSearchNotifier>(context, listen: false)
+                        .fetchMovieSearch(query)
                     : Provider.of<TvSearchNotifier>(context, listen: false)
-                    .fetchTvSearch(query);
+                        .fetchTvSearch(query);
               },
               decoration: InputDecoration(
                 hintText: 'Search title',
@@ -43,55 +44,57 @@ class SearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            (isMovie) ? Consumer<MovieSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (data.state == RequestState.Loaded) {
-                  final result = data.searchResult;
-                  return Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        final movie = data.searchResult[index];
-                        return MovieCard(movie);
-                      },
-                      itemCount: result.length,
-                    ),
-                  );
-                } else {
-                  return Expanded(
-                    child: Container(),
-                  );
-                }
-              },
-            ) : Consumer<TvSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.Loading) {
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } else if (data.state == RequestState.Loaded) {
-                  final result = data.searchResult;
-                  return Expanded(
-                    child: ListView.builder(
-                      padding: const EdgeInsets.all(8),
-                      itemBuilder: (context, index) {
-                        final tv = data.searchResult[index];
-                        return TvCard(tv);
-                      },
-                      itemCount: result.length,
-                    ),
-                  );
-                } else {
-                  return Expanded(
-                    child: Container(),
-                  );
-                }
-              },
-            ),
+            (isMovie)
+                ? Consumer<MovieSearchNotifier>(
+                    builder: (context, data, child) {
+                      if (data.state == RequestState.Loading) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (data.state == RequestState.Loaded) {
+                        final result = data.searchResult;
+                        return Expanded(
+                          child: ListView.builder(
+                            padding: const EdgeInsets.all(8),
+                            itemBuilder: (context, index) {
+                              final movie = data.searchResult[index];
+                              return MovieCard(movie);
+                            },
+                            itemCount: result.length,
+                          ),
+                        );
+                      } else {
+                        return Expanded(
+                          child: Container(),
+                        );
+                      }
+                    },
+                  )
+                : Consumer<TvSearchNotifier>(
+                    builder: (context, data, child) {
+                      if (data.state == RequestState.Loading) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (data.state == RequestState.Loaded) {
+                        final result = data.searchResult;
+                        return Expanded(
+                          child: ListView.builder(
+                            padding: const EdgeInsets.all(8),
+                            itemBuilder: (context, index) {
+                              final tv = data.searchResult[index];
+                              return TvCard(tv);
+                            },
+                            itemCount: result.length,
+                          ),
+                        );
+                      } else {
+                        return Expanded(
+                          child: Container(),
+                        );
+                      }
+                    },
+                  ),
           ],
         ),
       ),

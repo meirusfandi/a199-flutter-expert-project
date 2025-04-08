@@ -1,5 +1,5 @@
-import 'package:ditonton/domain/entities/tv_entity.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/tv_entity.dart';
 import 'package:ditonton/domain/usecases/get_popular_tvs.dart';
 import 'package:ditonton/domain/usecases/get_top_rated_tvs.dart';
 import 'package:ditonton/domain/usecases/get_tv_airing_today.dart';
@@ -43,12 +43,12 @@ class TvListNotifier extends ChangeNotifier {
 
     final result = await getTvAiringToday.execute();
     result.fold(
-          (failure) {
+      (failure) {
         _airingTodayState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
-          (TvData) {
+      (TvData) {
         _airingTodayState = RequestState.Loaded;
         _airingTodayTv = TvData;
         notifyListeners();
@@ -62,12 +62,12 @@ class TvListNotifier extends ChangeNotifier {
 
     final result = await getPopularTvs.execute();
     result.fold(
-          (failure) {
+      (failure) {
         _popularTvState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
-          (TvData) {
+      (TvData) {
         _popularTvState = RequestState.Loaded;
         _popularTv = TvData;
         notifyListeners();
@@ -81,12 +81,12 @@ class TvListNotifier extends ChangeNotifier {
 
     final result = await getTopRatedTvs.execute();
     result.fold(
-          (failure) {
+      (failure) {
         _topRatedTvState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
-          (TvData) {
+      (TvData) {
         _topRatedTvState = RequestState.Loaded;
         _topRatedTv = TvData;
         notifyListeners();

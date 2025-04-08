@@ -11,7 +11,15 @@ class SeasonModel extends Equatable {
   final int seasonNumber;
   final double voteAverage;
 
-  SeasonModel({required this.airDate, required this.episodeCount, required this.id, required this.name, required this.overview, required this.posterPath, required this.seasonNumber, required this.voteAverage});
+  SeasonModel(
+      {required this.airDate,
+      required this.episodeCount,
+      required this.id,
+      required this.name,
+      required this.overview,
+      required this.posterPath,
+      required this.seasonNumber,
+      required this.voteAverage});
 
   factory SeasonModel.fromJson(Map<String, dynamic> json) {
     return SeasonModel(
@@ -39,9 +47,26 @@ class SeasonModel extends Equatable {
   }
 
   Season toEntity() {
-    return Season(airDate: this.airDate, episodeCount: this.episodeCount, id: this.id, name: this.name, overview: this.overview, posterPath: this.posterPath, seasonNumber: this.seasonNumber, voteAverage: this.voteAverage);
+    return Season(
+        airDate: this.airDate,
+        episodeCount: this.episodeCount,
+        id: this.id,
+        name: this.name,
+        overview: this.overview,
+        posterPath: this.posterPath,
+        seasonNumber: this.seasonNumber,
+        voteAverage: this.voteAverage);
   }
 
   @override
-  List<Object?> get props => [airDate, episodeCount, id, name, overview, posterPath, seasonNumber, voteAverage];
+  List<Object?> get props => [
+        airDate,
+        episodeCount,
+        id,
+        name,
+        overview,
+        posterPath,
+        seasonNumber,
+        voteAverage
+      ];
 }

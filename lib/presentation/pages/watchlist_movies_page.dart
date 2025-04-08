@@ -14,7 +14,8 @@ class WatchlistMoviesPage extends StatefulWidget {
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
 }
 
-class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAware, SingleTickerProviderStateMixin {
+class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
+    with RouteAware, SingleTickerProviderStateMixin {
   late TabController tabController;
 
   @override
@@ -30,7 +31,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
           .fetchWatchlistMovies();
       Provider.of<WatchlistTvNotifier>(context, listen: false)
           .fetchWatchlistTv();
-    }); 
+    });
   }
 
   @override
@@ -42,8 +43,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
   void didPopNext() {
     Provider.of<WatchlistMovieNotifier>(context, listen: false)
         .fetchWatchlistMovies();
-    Provider.of<WatchlistTvNotifier>(context, listen: false)
-        .fetchWatchlistTv();
+    Provider.of<WatchlistTvNotifier>(context, listen: false).fetchWatchlistTv();
   }
 
   @override
@@ -72,7 +72,9 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: (tabController.index == 0) ? sectionMovies(context) : sectionTvs(context),
+        child: (tabController.index == 0)
+            ? sectionMovies(context)
+            : sectionTvs(context),
       ),
     );
   }
@@ -85,16 +87,18 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
             child: CircularProgressIndicator(),
           );
         } else if (data.watchlistState == RequestState.Loaded) {
-          return (data.watchlistMovies.isNotEmpty) ? ListView.builder(
-            itemBuilder: (context, index) {
-              final movie = data.watchlistMovies[index];
-              return MovieCard(movie);
-            },
-            itemCount: data.watchlistMovies.length,
-          ) : Center(
-        key: Key('error_message'),
-        child: Text("No Movies in Watchlist"),
-        );
+          return (data.watchlistMovies.isNotEmpty)
+              ? ListView.builder(
+                  itemBuilder: (context, index) {
+                    final movie = data.watchlistMovies[index];
+                    return MovieCard(movie);
+                  },
+                  itemCount: data.watchlistMovies.length,
+                )
+              : Center(
+                  key: Key('error_message'),
+                  child: Text("No Movies in Watchlist"),
+                );
         } else {
           return Center(
             key: Key('error_message'),
@@ -113,16 +117,18 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
             child: CircularProgressIndicator(),
           );
         } else if (dataTv.watchlistState == RequestState.Loaded) {
-          return (dataTv.watchlistTvs.isNotEmpty) ? ListView.builder(
-            itemBuilder: (context, index) {
-              final tv = dataTv.watchlistTvs[index];
-              return TvCard(tv);
-            },
-            itemCount: dataTv.watchlistTvs.length,
-          ) : Center(
-            key: Key('error_message'),
-            child: Text("No Tv Series in Watchlist"),
-          );
+          return (dataTv.watchlistTvs.isNotEmpty)
+              ? ListView.builder(
+                  itemBuilder: (context, index) {
+                    final tv = dataTv.watchlistTvs[index];
+                    return TvCard(tv);
+                  },
+                  itemCount: dataTv.watchlistTvs.length,
+                )
+              : Center(
+                  key: Key('error_message'),
+                  child: Text("No Tv Series in Watchlist"),
+                );
         } else {
           return Center(
             key: Key('error_message'),
@@ -132,6 +138,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage> with RouteAwa
       },
     );
   }
+
   @override
   void dispose() {
     routeObserver.unsubscribe(this);

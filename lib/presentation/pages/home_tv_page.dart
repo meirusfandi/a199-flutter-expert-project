@@ -7,6 +7,7 @@ import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
 import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
+import 'package:ditonton/presentation/widgets/sub_heading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,11 +21,10 @@ class _HomeTvPageState extends State<HomeTvPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-            () => Provider.of<TvListNotifier>(context, listen: false)
-          ..fetchAiringTodayTv()
-          ..fetchPopularTv()
-          ..fetchTopRatedTv());
+    Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
+      ..fetchAiringTodayTv()
+      ..fetchPopularTv()
+      ..fetchTopRatedTv());
   }
 
   @override
@@ -35,7 +35,8 @@ class _HomeTvPageState extends State<HomeTvPage> {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.pushNamed(context, SearchPage.ROUTE_NAME, arguments: false);
+              Navigator.pushNamed(context, SearchPage.ROUTE_NAME,
+                  arguments: false);
             },
             icon: Icon(Icons.search),
           )
@@ -51,7 +52,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                 'Airing Today',
                 style: kHeading6,
               ),
-              Consumer<TvListNotifier>(builder: (context, data, child) {
+              Consumer<TvListNotifier>(builder: (_, data, __) {
                 final state = data.airingTodayState;
                 if (state == RequestState.Loading) {
                   return Center(
@@ -63,7 +64,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                   return Text('Failed');
                 }
               }),
-              _buildSubHeading(
+              SubHeading(
                 title: 'Popular',
                 onTap: () =>
                     Navigator.pushNamed(context, PopularTvPage.ROUTE_NAME),
@@ -80,7 +81,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
                   return Text('Failed');
                 }
               }),
-              _buildSubHeading(
+              SubHeading(
                 title: 'Top Rated',
                 onTap: () =>
                     Navigator.pushNamed(context, TopRatedTvPage.ROUTE_NAME),
@@ -101,27 +102,6 @@ class _HomeTvPageState extends State<HomeTvPage> {
           ),
         ),
       ),
-    );
-  }
-
-  Row _buildSubHeading({required String title, required Function() onTap}) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: kHeading6,
-        ),
-        InkWell(
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [Text('See More'), Icon(Icons.arrow_forward_ios)],
-            ),
-          ),
-        ),
-      ],
     );
   }
 }

@@ -14,7 +14,8 @@ class TvRepositoryImpl implements TvRepository {
   final TvRemoteDataSource tvRemoteDataSource;
   final TvLocalDataSource tvLocalDataSource;
 
-  TvRepositoryImpl({required this.tvRemoteDataSource, required this.tvLocalDataSource});
+  TvRepositoryImpl(
+      {required this.tvRemoteDataSource, required this.tvLocalDataSource});
 
   @override
   Future<Either<Failure, List<TvEntity>>> getAiringTodayTv() async {
@@ -104,7 +105,7 @@ class TvRepositoryImpl implements TvRepository {
   Future<Either<Failure, String>> removeTVWatchlist(TvDetail tv) async {
     try {
       final result =
-      await tvLocalDataSource.removeWatchlistTv(TvTable.fromEntity(tv));
+          await tvLocalDataSource.removeWatchlistTv(TvTable.fromEntity(tv));
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
@@ -115,7 +116,7 @@ class TvRepositoryImpl implements TvRepository {
   Future<Either<Failure, String>> saveTVWatchlist(TvDetail tv) async {
     try {
       final result =
-      await tvLocalDataSource.insertWatchlistTv(TvTable.fromEntity(tv));
+          await tvLocalDataSource.insertWatchlistTv(TvTable.fromEntity(tv));
       return Right(result);
     } on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));

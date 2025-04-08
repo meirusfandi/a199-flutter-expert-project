@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/common/state_enum.dart';
+import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/tv_detail.dart';
 import 'package:ditonton/domain/entities/tv_entity.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
@@ -63,10 +63,7 @@ class DetailContent extends StatelessWidget {
   final List<TvEntity> recommendations;
   final bool isAddedWatchlist;
 
-  DetailContent(
-      this.Tv, this.recommendations,
-      this.isAddedWatchlist
-      );
+  DetailContent(this.Tv, this.recommendations, this.isAddedWatchlist);
 
   @override
   Widget build(BuildContext context) {
@@ -111,25 +108,23 @@ class DetailContent extends StatelessWidget {
                             FilledButton(
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
-                                  await Provider.of<TvDetailNotifier>(
-                                      context,
-                                      listen: false)
+                                  await Provider.of<TvDetailNotifier>(context,
+                                          listen: false)
                                       .addWatchlist(Tv);
                                 } else {
-                                  await Provider.of<TvDetailNotifier>(
-                                      context,
-                                      listen: false)
+                                  await Provider.of<TvDetailNotifier>(context,
+                                          listen: false)
                                       .removeFromWatchlist(Tv);
                                 }
 
-                                final message =
-                                    Provider.of<TvDetailNotifier>(context,
+                                final message = Provider.of<TvDetailNotifier>(
+                                        context,
                                         listen: false)
-                                        .watchlistMessage;
+                                    .watchlistMessage;
 
                                 if (message ==
-                                    TvDetailNotifier
-                                        .watchlistAddSuccessMessage ||
+                                        TvDetailNotifier
+                                            .watchlistAddSuccessMessage ||
                                     message ==
                                         TvDetailNotifier
                                             .watchlistRemoveSuccessMessage) {
@@ -191,79 +186,21 @@ class DetailContent extends StatelessWidget {
                             Container(
                               height: 32,
                               child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemCount: Tv.seasons.length,
-                                itemBuilder: (context, index) {
-                                  final season = Tv.seasons;
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      season[index].name
-                                    ),
-                                  );
-                                }
-                              ),
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: Tv.seasons.length,
+                                  itemBuilder: (context, index) {
+                                    final season = Tv.seasons;
+                                    return Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(season[index].name),
+                                    );
+                                  }),
                             ),
                             Text(
                               'Recommendations',
                               style: kHeading6,
                             ),
-                            Consumer<TvDetailNotifier>(
-                              builder: (context, data, child) {
-                                if (data.recommendationState ==
-                                    RequestState.Loading) {
-                                  return Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                } else if (data.recommendationState ==
-                                    RequestState.Error) {
-                                  return Text(data.message);
-                                } else if (data.recommendationState ==
-                                    RequestState.Loaded) {
-                                  return Container(
-                                    height: 150,
-                                    child: ListView.builder(
-                                      scrollDirection: Axis.horizontal,
-                                      itemBuilder: (context, index) {
-                                        final Tv = recommendations[index];
-                                        return Padding(
-                                          padding: const EdgeInsets.all(4.0),
-                                          child: InkWell(
-                                            onTap: () {
-                                              Navigator.pushReplacementNamed(
-                                                context,
-                                                TvDetailPage.ROUTE_NAME,
-                                                arguments: Tv.id,
-                                              );
-                                            },
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.all(
-                                                Radius.circular(8),
-                                              ),
-                                              child: CachedNetworkImage(
-                                                imageUrl:
-                                                'https://image.tmdb.org/t/p/w500${Tv.posterPath}',
-                                                placeholder: (context, url) =>
-                                                    Center(
-                                                      child:
-                                                      CircularProgressIndicator(),
-                                                    ),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                    Icon(Icons.error),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                      itemCount: recommendations.length,
-                                    ),
-                                  );
-                                } else {
-                                  return Container();
-                                }
-                              },
-                            ),
+                            _recommendationSection(),
                           ],
                         ),
                       ),
@@ -280,9 +217,7 @@ class DetailContent extends StatelessWidget {
                 ),
               );
             },
-            // initialChildSize: 0.5,
             minChildSize: 0.25,
-            // maxChildSize: 1.0,
           ),
         ),
         Padding(
@@ -302,17 +237,60 @@ class DetailContent extends StatelessWidget {
     );
   }
 
+  Widget _recommendationSection() {
+    return Consumer<TvDetailNotifier>(
+      builder: (context, data, child) {
+        if (data.recommendationState == RequestState.Loading) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (data.recommendationState == RequestState.Error) {
+          return Text(data.message);
+        } else if (data.recommendationState == RequestState.Loaded) {
+          return Container(
+            height: 150,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                final Tv = recommendations[index];
+                return Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        TvDetailPage.ROUTE_NAME,
+                        arguments: Tv.id,
+                      );
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            'https://image.tmdb.org/t/p/w500${Tv.posterPath}',
+                        placeholder: (context, url) => Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    ),
+                  ),
+                );
+              },
+              itemCount: recommendations.length,
+            ),
+          );
+        } else {
+          return SizedBox();
+        }
+      },
+    );
+  }
+
   String _showGenres(List<Genre> genres) {
-    String result = '';
-    for (var genre in genres) {
-      result += genre.name + ', ';
-    }
-
-    if (result.isEmpty) {
-      return result;
-    }
-
-    return result.substring(0, result.length - 2);
+    return genres.map((e) => e.name).toList().join(',');
   }
 
   String _showDuration(int runtime) {
