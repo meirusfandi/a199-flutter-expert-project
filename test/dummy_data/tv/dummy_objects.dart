@@ -1,8 +1,9 @@
-import 'package:ditonton/data/models/tv_table.dart';
-import 'package:ditonton/domain/entities/genre.dart';
-import 'package:ditonton/domain/entities/season.dart';
-import 'package:ditonton/domain/entities/tv_detail.dart';
-import 'package:ditonton/domain/entities/tv_entity.dart';
+
+import 'package:tv_series/domain/entities/genre.dart';
+import 'package:tv_series/domain/entities/season.dart';
+import 'package:tv_series/domain/entities/tv_detail.dart';
+import 'package:tv_series/domain/entities/tv_entity.dart';
+import 'package:tv_series/tv_series.dart';
 
 final testTv = TvEntity(
   adult: false,

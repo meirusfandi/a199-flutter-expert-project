@@ -1,12 +1,11 @@
 import 'dart:convert';
-
-import 'package:ditonton/data/datasources/tv_remote_data_source.dart';
-import 'package:ditonton/common/exception.dart';
-import 'package:ditonton/data/models/tv_detail_model.dart';
-import 'package:ditonton/data/models/tv_response.dart';
+import 'package:core/core.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
+import 'package:tv_series/data/models/tv_detail_model.dart';
+import 'package:tv_series/data/models/tv_response.dart';
+import 'package:tv_series/tv_series.dart';
 
 import '../../json_reader.dart';
 import '../../helpers/test_helper.mocks.dart';
